@@ -1,0 +1,157 @@
+{
+    "name": "codesync",
+    "displayName": "codesync",
+    "publisher": "codesync",
+    "icon": "resources/logo.png",
+    "description": "Store and share your cursor and copilot conversations",
+    "version": "0.0.15",
+    "engines": {
+        "vscode": "^1.91.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "./dist/extension.js",
+    "contributes": {
+        "chatParticipants": [
+            {
+                "id": "codesync-participant.codesync",
+                "fullName": "Codesync Chat Participant",
+                "name": "codesync",
+                "description": "Provides insights and makes edits to code based on context.",
+                "isSticky": false,
+                "commands": []
+            }
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "codesync",
+                    "title": "Codesync",
+                    "icon": "resources/sidebar-icon.svg"
+                }
+            ]
+        },
+        "views": {
+            "codesync": [
+                {
+                    "type": "webview",
+                    "id": "codesync.panelView",
+                    "name": "Panel View"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "codesync.startInlineChat",
+                "title": "Start Inline Chat",
+                "category": "codesync"
+            },
+            {
+                "command": "codesync.removeInlineChat",
+                "title": "Remove Inline Chat",
+                "category": "codesync"
+            },
+            {
+                "command": "codesync.toggleHover",
+                "title": "Toggle Hover",
+                "category": "codesync"
+            },
+            {
+                "command": "codesync.deletePanelChat",
+                "title": "Delete Panel Chat",
+                "category": "codesync"
+            },
+            {
+                "command": "codesync.showIndividualPanelChat",
+                "title": "Show Individual Panel Chat",
+                "category": "Codesync"
+            },
+            {
+                "command": "codesync.excludeSearch",
+                "title": "Exclude .codesync files from search",
+                "category": "Codesync"
+            },
+            {
+                "command": "codesync.initializeCodesync",
+                "title": "Initialize Codesync",
+                "category": "Codesync"
+            },
+            {
+                "command": "codesync.removeCodesync",
+                "title": "Remove Codesync",
+                "category": "Codesync"
+            },
+            {
+                "command": "codesync.addUserComment",
+                "title": "Codesync: Add/Edit User Comment"
+            },
+            {
+                "command": "codesync.setTool",
+                "title": "Set IDE Tool Override",
+                "category": "Codesync"
+            },
+            {
+                "command": "codesync.debugFile",
+                "title": "Debug File",
+                "category": "Codesync"
+            },
+            {
+                "command": "codesync.focusPanel",
+                "title": "Focus Codesync Panel",
+                "category": "Codesync"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "codesync.startInlineChat",
+                "key": "cmd+i",
+                "when": "editorFocus && inlineChatHasProvider && !editorReadonly"
+            },
+            {
+                "key": "cmd+shift+g",
+                "command": "codesync.toggleHover"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run package",
+        "compile": "webpack",
+        "watch": "webpack --watch",
+        "package": "webpack --mode production --devtool hidden-source-map",
+        "compile-tests": "tsc -p . --outDir out",
+        "watch-tests": "tsc -p . -w --outDir out",
+        "pretest": "npm run compile-tests && npm run compile && npm run lint",
+        "lint": "eslint src",
+        "test": "vscode-test --version 1.60.0"
+    },
+    "devDependencies": {
+        "@types/diff": "^5.2.2",
+        "@types/mocha": "^10.0.7",
+        "@types/node": "20.x",
+        "@types/uuid": "^10.0.0",
+        "@types/vscode": "^1.91.0",
+        "@typescript-eslint/eslint-plugin": "^8.3.0",
+        "@typescript-eslint/parser": "^8.3.0",
+        "@vscode/test-cli": "^0.0.10",
+        "@vscode/test-electron": "^2.4.1",
+        "eslint": "^9.11.1",
+        "ts-loader": "^9.5.1",
+        "typescript": "^5.5.4",
+        "webpack": "^5.94.0",
+        "webpack-cli": "^5.1.4"
+    },
+    "dependencies": {
+        "csv-parse": "^5.5.6",
+        "diff": "^7.0.0",
+        "file-uri-to-path": "^2.0.0",
+        "posthog-js": "^1.166.1",
+        "simple-git": "^3.26.0",
+        "sqlite3": "^5.1.7",
+        "uuid": "^10.0.0",
+        "zod": "^3.23.8"
+    }
+}
